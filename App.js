@@ -1,18 +1,26 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
-import MyFriends from "./src/pertemuan-4/components/Friends/MyFriends";
+import React from "react";
+import { Text } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import SignInScreen from "./src/pertemuan-5/components/Form/SignInScreen";
+
+const Stack = createNativeStackNavigator();
+
+const Page2 = ({ navigation, route }) => {
+  return <Text>This is {route.params.name}'s Home</Text>;
+};
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <MyFriends />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="SignIn">
+        <Stack.Screen
+          name="SignIn"
+          component={SignInScreen}
+          options={{ title: "Sign In" }}
+        />
+        <Stack.Screen name="Page2" component={Page2} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-});
